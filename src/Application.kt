@@ -4,8 +4,9 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.yarn.services.controllers.AdventureController
 import com.yarn.services.core.kodein.bindSingleton
 import com.yarn.services.core.kodein.kodeinApplication
-import com.yarn.services.data.Adventure
+import com.yarn.services.models.Adventure
 import com.yarn.services.data.AdventureInProgress
+import com.yarn.services.data.AdventureRepository
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -19,6 +20,8 @@ import io.ktor.request.path
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.id.jackson.IdJacksonModule
 import org.litote.kmongo.reactivestreams.KMongo
@@ -26,7 +29,7 @@ import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-@Suppress("unused") // Referenced in application.conf
+@Suppress("unused")
 fun Application.module() {
 	install(CallLogging) {
 		level = Level.INFO
@@ -55,6 +58,7 @@ fun Application.module() {
 
 
 	kodeinApplication {
+		bind<AdventureRepository>() with singleton { AdventureRepository(adventureCollection) }
 		bindSingleton { AdventureController(it) }
 	}
 

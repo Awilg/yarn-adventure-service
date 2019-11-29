@@ -1,4 +1,4 @@
-package com.yarn.services.data
+package com.yarn.services.models
 
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id

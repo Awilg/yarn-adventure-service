@@ -1,8 +1,29 @@
 package com.yarn.services.data
 
 import com.yarn.services.core.data.BaseDaoAsync
+import com.yarn.services.models.Adventure
+import com.yarn.services.models.LatLng
+import org.litote.kmongo.MongoOperator
 import org.litote.kmongo.coroutine.CoroutineCollection
 
-class AdventureRepository(collection: CoroutineCollection<Adventure>) : BaseDaoAsync<Adventure>(collection) {
+class AdventureRepository(val collection: CoroutineCollection<Adventure>) : BaseDaoAsync<Adventure>(collection) {
 
+	//47.6062° N, 122.3321° W
+	suspend fun findByLocation(latlng: LatLng): List<Adventure> {
+		val results = collection.find(
+			"{ " +
+				"location: {" +
+				"${MongoOperator.nearSphere}:{" +
+				"${MongoOperator.geometry}:{" +
+				"type: Point" +
+				"coordinates: []float64{${latlng.longitude}, ${latlng.latitude}}, }," +
+				"\$maxDistance: maxDistance," +
+				"\$minDistance: minDistance," +
+				"}," +
+				"}," +
+				"}"
+		)
+
+		return results.toList()
+	}
 }
