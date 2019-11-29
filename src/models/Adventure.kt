@@ -7,14 +7,14 @@ import java.time.Instant
 import java.util.Objects.hash
 
 class Adventure private constructor(
-	@BsonId val key : Id<Adventure> = newId(),
+	@BsonId val key: Id<Adventure> = newId(),
 	val location: Location?,
 	val name: String,
 	val creator: String?,
 	val creatorId: String?,
 	val createdAt: String = Instant.now().toEpochMilli().toString(),
 	val expiresAt: String? = null
-	) {
+) {
 	override fun equals(other: Any?) = other is Adventure &&
 		key == other.key &&
 		location == other.location &&
@@ -62,7 +62,21 @@ fun Adventure(initializer: Adventure.Builder.() -> Unit): Adventure {
 	return Adventure.Builder().apply(initializer).build()
 }
 
-class Location private constructor(
-	val type : String,
-	val coordinates : FloatArray
-)
+data class Location(
+	val type: String = "Point",
+	val coordinates: DoubleArray
+) {
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (javaClass != other?.javaClass) return false
+
+		other as Location
+
+		if (type != other.type) return false
+		if (!coordinates.contentEquals(other.coordinates)) return false
+
+		return true
+	}
+
+	override fun hashCode() = hash(type, coordinates)
+}

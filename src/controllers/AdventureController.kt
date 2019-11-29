@@ -4,7 +4,10 @@ import com.yarn.services.core.controllers.KodeinController
 import com.yarn.services.core.logging.logger
 import com.yarn.services.data.AdventureRepository
 import com.yarn.services.models.Adventure
+import com.yarn.services.models.requests.AdventureCreate
+import com.yarn.services.models.requests.toAdventure
 import io.ktor.application.call
+import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.Routing
@@ -17,21 +20,19 @@ class AdventureController(kodein: Kodein) : KodeinController(kodein) {
 	private val adventureDao : AdventureRepository by instance()
 
 	override fun Routing.registerRoutes() {
-		get("/adventure") {
+		get("/adventure/{id}") {
 			logger.info("Calling an adventure!")
+			val adventureId = call.parameters["id"]
 
-			call.respond(Adventure {
-				name = "testAdventure"
-				creator = "James"
-			})
+			val adventure = adventureId?.let { id -> adventureDao.get(id) }
+			adventure?.let { a -> call.respond(a) }
 		}
 
 		post("/adventure") {
-			adventureDao.save(Adventure {
-				name = "testAdventure"
-				creator = "James"
-			})
-			call.respondText("Adventure Created!")
+			val toCreate = call.receive<AdventureCreate>()
+			val newAdventure = toCreate.toAdventure()
+			adventureDao.save(newAdventure)
+			call.respond(newAdventure)
 		}
 	}
 }
