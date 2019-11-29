@@ -1,4 +1,4 @@
-# User Service
+# Adventure Service
 
 This is the backend user service for the [Yarn](https://github.com/Awilg/yarn-android) mobile app. 
 It is a fully async/reactive service written entirely in kotlin and uses the 
