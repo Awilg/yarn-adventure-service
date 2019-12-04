@@ -10,6 +10,7 @@ class Adventure private constructor(
 	@BsonId val id: Id<Adventure> = newId(),
 	val location: Location?,
 	val name: String,
+	val description: String,
 	val creator: String?,
 	val creatorId: String?,
 	val createdAt: String = Instant.now().toEpochMilli().toString(),
@@ -19,21 +20,26 @@ class Adventure private constructor(
 		id == other.id &&
 		location == other.location &&
 		name == other.name &&
+		description == other.description &&
 		creator == other.creator &&
 		creatorId == other.creatorId &&
 		createdAt == other.createdAt &&
 		expiresAt == other.expiresAt
 
-	override fun hashCode() = hash(id, name, creator, creatorId, createdAt, expiresAt)
+	override fun hashCode() = hash(id, name, description, creator, creatorId, createdAt, expiresAt)
 
-	override fun toString() = "Adventure(key=$id, location=$location, name='$name', creator='$creator'," +
-		" creatorId='$creatorId', createdAt='$createdAt', expiresAt=$expiresAt)"
+	override fun toString(): String {
+		return "Adventure(id=$id, location=$location, name='$name', description='$description', " +
+			"creator=$creator, creatorId=$creatorId, createdAt='$createdAt', expiresAt=$expiresAt)"
+	}
 
 	class Builder {
 		@set:JvmSynthetic // Hide 'void' setter from Java.
 		var location: Location? = null
 		@set:JvmSynthetic // Hide 'void' setter from Java.
 		var name: String? = null
+		@set:JvmSynthetic // Hide 'void' setter from Java.
+		var description: String? = null
 		@set:JvmSynthetic // Hide 'void' setter from Java.
 		var creator: String? = null
 		@set:JvmSynthetic // Hide 'void' setter from Java.
@@ -44,12 +50,14 @@ class Adventure private constructor(
 		fun setLocation(location: Location?) = apply { this.location = location }
 		fun setName(name: String?) = apply { this.name = name }
 		fun setCreator(creator: String?) = apply { this.creator = creator }
+		fun setDescription(description: String?) = apply { this.description = description }
 		fun setCreatorId(creatorId: String?) = apply { this.creatorId = creatorId }
 		fun setExpiresAt(expiresAt: String?) = apply { this.expiresAt = expiresAt }
 
 		fun build() = Adventure(
 			location = this.location,
 			name = checkNotNull(this.name) { "'name' is required" },
+			description = checkNotNull(this.description) { "'description' is required" },
 			creator = this.creator,
 			creatorId = this.creatorId,
 			expiresAt = this.expiresAt

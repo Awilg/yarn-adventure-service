@@ -6,7 +6,8 @@ import com.yarn.services.models.Location
 
 data class AdventureCreate(
 	val name: String,
-	val location: LatLng
+	val location: LatLng,
+	val description: String
 )
 
 fun AdventureCreate.toAdventure(): Adventure {
