@@ -7,7 +7,7 @@ import java.time.Instant
 import java.util.Objects.hash
 
 class Adventure private constructor(
-	@BsonId val key: Id<Adventure> = newId(),
+	@BsonId val id: Id<Adventure> = newId(),
 	val location: Location?,
 	val name: String,
 	val creator: String?,
@@ -16,7 +16,7 @@ class Adventure private constructor(
 	val expiresAt: String? = null
 ) {
 	override fun equals(other: Any?) = other is Adventure &&
-		key == other.key &&
+		id == other.id &&
 		location == other.location &&
 		name == other.name &&
 		creator == other.creator &&
@@ -24,9 +24,9 @@ class Adventure private constructor(
 		createdAt == other.createdAt &&
 		expiresAt == other.expiresAt
 
-	override fun hashCode() = hash(key, name, creator, creatorId, createdAt, expiresAt)
+	override fun hashCode() = hash(id, name, creator, creatorId, createdAt, expiresAt)
 
-	override fun toString() = "Adventure(key=$key, location=$location, name='$name', creator='$creator'," +
+	override fun toString() = "Adventure(key=$id, location=$location, name='$name', creator='$creator'," +
 		" creatorId='$creatorId', createdAt='$createdAt', expiresAt=$expiresAt)"
 
 	class Builder {
@@ -66,6 +66,9 @@ data class Location(
 	val type: String = "Point",
 	val coordinates: DoubleArray
 ) {
+	fun getLat() = coordinates.getOrNull(1)
+	fun getLng() = coordinates.getOrNull(0)
+
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (javaClass != other?.javaClass) return false
