@@ -19,5 +19,6 @@ fun AdventureCreate.toAdventure(): Adventure {
 				this@toAdventure.location.latitude
 			)
 		)
+		description = this@toAdventure.description
 	}
 }
