@@ -14,9 +14,12 @@ import io.ktor.auth.Authentication
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.DefaultHeaders
+import io.ktor.features.StatusPages
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.request.path
+import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
@@ -34,6 +37,12 @@ fun Application.module() {
 	install(CallLogging) {
 		level = Level.INFO
 		filter { call -> call.request.path().startsWith("/") }
+	}
+
+	install(StatusPages) {
+		exception<Throwable> {
+			call.respond(HttpStatusCode.InternalServerError)
+		}
 	}
 
 	install(DefaultHeaders) {

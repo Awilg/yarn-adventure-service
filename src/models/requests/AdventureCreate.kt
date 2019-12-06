@@ -1,13 +1,15 @@
 package com.yarn.services.models.requests
 
 import com.yarn.services.models.Adventure
+import com.yarn.services.models.Clue
 import com.yarn.services.models.LatLng
 import com.yarn.services.models.Location
 
 data class AdventureCreate(
 	val name: String,
 	val location: LatLng,
-	val description: String
+	val description: String,
+	val clues: List<Clue>?
 )
 
 fun AdventureCreate.toAdventure(): Adventure {
@@ -20,5 +22,6 @@ fun AdventureCreate.toAdventure(): Adventure {
 			)
 		)
 		description = this@toAdventure.description
+		clueIds = clues?.map { it.id.toString() }
 	}
 }
