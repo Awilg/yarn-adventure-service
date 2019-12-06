@@ -12,7 +12,8 @@ class AdventureInfo private constructor(
 	val creator: String?,
 	val creatorId: String?,
 	val createdAt: String?,
-	val expiresAt: String?
+	val expiresAt: String?,
+	val clues: List<ClueInfo>?
 ) {
 	override fun equals(other: Any?) = other is AdventureInfo &&
 		id == other.id &&
@@ -21,12 +22,13 @@ class AdventureInfo private constructor(
 		creator == other.creator &&
 		creatorId == other.creatorId &&
 		createdAt == other.createdAt &&
-		expiresAt == other.expiresAt
+		expiresAt == other.expiresAt &&
+		clues == other.clues
 
-	override fun hashCode() = Objects.hash(id, name, creator, creatorId, createdAt, expiresAt)
+	override fun hashCode() = Objects.hash(id, name, creator, creatorId, createdAt, expiresAt, clues)
 
 	override fun toString() = "Adventure(key=$id, location=$location, name='$name', creator='$creator'," +
-		" creatorId='$creatorId', createdAt='$createdAt', expiresAt=$expiresAt)"
+		" creatorId='$creatorId', createdAt='$createdAt', expiresAt=$expiresAt, clues=$clues)"
 
 	class Builder {
 		@set:JvmSynthetic // Hide 'void' setter from Java.
@@ -43,6 +45,8 @@ class AdventureInfo private constructor(
 		var createdAt: String? = null
 		@set:JvmSynthetic // Hide 'void' setter from Java.
 		var expiresAt: String? = null
+		@set:JvmSynthetic // Hide 'void' setter from Java.
+		var clues: List<ClueInfo>? = null
 
 		fun setId(id: String?) = apply { this.id = id }
 		fun setLocation(location: LatLng?) = apply { this.location = location }
@@ -51,6 +55,7 @@ class AdventureInfo private constructor(
 		fun setCreatorId(creatorId: String?) = apply { this.creatorId = creatorId }
 		fun setCreatedAt(createdAt: String?) = apply { this.createdAt = createdAt }
 		fun setExpiresAt(expiresAt: String?) = apply { this.expiresAt = expiresAt }
+		fun setClues(clues: List<ClueInfo>?) = apply { this.clues = clues }
 
 		fun build() = AdventureInfo(
 			id = checkNotNull(this.id) { "An adventure 'id' is required" },
@@ -59,7 +64,8 @@ class AdventureInfo private constructor(
 			creator = this.creator,
 			creatorId = this.creatorId,
 			createdAt = this.createdAt,
-			expiresAt = this.expiresAt
+			expiresAt = this.expiresAt,
+			clues = this.clues
 		)
 	}
 }
@@ -78,6 +84,7 @@ fun Adventure.toInfo() =
 		creatorId = this@toInfo.creatorId
 		creator = this@toInfo.creator
 		expiresAt = this@toInfo.expiresAt
+		clues = this@toInfo.clues?.map { it.toInfo() }
 	}
 
 

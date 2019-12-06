@@ -31,6 +31,7 @@ class AdventureController(kodein: Kodein) : KodeinController(kodein) {
 		post("/adventure") {
 			val toCreate = call.receive<AdventureCreate>()
 			val newAdventure = toCreate.toAdventure()
+
 			adventureDao.save(newAdventure)
 			call.respond(newAdventure.toInfo())
 		}

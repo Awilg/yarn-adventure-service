@@ -15,7 +15,7 @@ class Adventure private constructor(
 	val creatorId: String?,
 	val createdAt: String = Instant.now().toEpochMilli().toString(),
 	val expiresAt: String? = null,
-	var clueIds: List<String>?
+	var clues: List<Clue>?
 ) {
 	override fun equals(other: Any?) = other is Adventure &&
 		id == other.id &&
@@ -26,13 +26,13 @@ class Adventure private constructor(
 		creatorId == other.creatorId &&
 		createdAt == other.createdAt &&
 		expiresAt == other.expiresAt &&
-		clueIds == other.clueIds
+		clues == other.clues
 
-	override fun hashCode() = hash(id, name, description, creator, creatorId, createdAt, expiresAt, clueIds)
+	override fun hashCode() = hash(id, name, description, creator, creatorId, createdAt, expiresAt, clues)
 
 	override fun toString(): String {
 		return "Adventure(id=$id, location=$location, name='$name', description='$description', " +
-			"creator=$creator, creatorId=$creatorId, createdAt='$createdAt', expiresAt=$expiresAt, clueIds=$clueIds)"
+			"creator=$creator, creatorId=$creatorId, createdAt='$createdAt', expiresAt=$expiresAt, clues=$clues)"
 	}
 
 	class Builder {
@@ -49,7 +49,7 @@ class Adventure private constructor(
 		@set:JvmSynthetic // Hide 'void' setter from Java.
 		var expiresAt: String? = null
 		@set:JvmSynthetic // Hide 'void' setter from Java.
-		var clueIds: List<String>? = null
+		var clues: List<Clue>? = null
 
 		fun setLocation(location: Location?) = apply { this.location = location }
 		fun setName(name: String?) = apply { this.name = name }
@@ -57,7 +57,7 @@ class Adventure private constructor(
 		fun setDescription(description: String?) = apply { this.description = description }
 		fun setCreatorId(creatorId: String?) = apply { this.creatorId = creatorId }
 		fun setExpiresAt(expiresAt: String?) = apply { this.expiresAt = expiresAt }
-		fun setClueIds(clueIds: List<String>?) = apply { this.clueIds = clueIds }
+		fun setClues(clues: List<Clue>?) = apply { this.clues = clues }
 
 		fun build() = Adventure(
 			location = this.location,
@@ -66,7 +66,7 @@ class Adventure private constructor(
 			creator = this.creator,
 			creatorId = this.creatorId,
 			expiresAt = this.expiresAt,
-			clueIds = this.clueIds
+			clues = this.clues
 		)
 	}
 }
