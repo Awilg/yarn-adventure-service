@@ -1,7 +1,6 @@
 package com.yarn.services.models.requests
 
 import com.yarn.services.models.Adventure
-import com.yarn.services.models.Clue
 import com.yarn.services.models.LatLng
 import com.yarn.services.models.Location
 
