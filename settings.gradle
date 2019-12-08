@@ -1,3 +1,5 @@
 rootProject.name = "adventure"
 
+enableFeaturePreview 'STABLE_PUBLISHING'
+
 include ":adventure-svc-core"
