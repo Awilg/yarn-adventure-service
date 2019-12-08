@@ -14,8 +14,13 @@ ext {
 		ktor : [
 			auth : "io.ktor:ktor-auth:${versions.ktor}",
 			authJwt : "io.ktor:ktor-auth-jwt:${versions.ktor}",
+			clientApache : "io.ktor:ktor-client-apache:${versions.ktor}",
+			clientAuthJvm : "io.ktor:ktor-client-auth-jvm:${versions.ktor}",
 			clientCore : "io.ktor:ktor-client-core:${versions.ktor}",
 			clientCoreJvm : "io.ktor:ktor-client-core-jvm:${versions.ktor}",
+			clientJsonJvm : "io.ktor:ktor-client-json-jvm:${versions.ktor}",
+			clientGson : "io.ktor:ktor-client-gson:${versions.ktor}",
+			clientLoggingJvm : "io.ktor:ktor-client-logging-jvm:${versions.ktor}",
 			metrics : "io.ktor:ktor-metrics:${versions.ktor}",
 			jackson : "io.ktor:ktor-jackson:${versions.ktor}",
 			serverCore : "io.ktor:ktor-server-core:${versions.ktor}",

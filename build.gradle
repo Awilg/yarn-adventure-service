@@ -40,3 +40,8 @@ project(':adventure-svc-core') {
 	group   'com.yarn'
 	version '0.0.1'
 }
+
+project(':adventure-svc-client') {
+	group   'com.yarn'
+	version '0.0.1'
+}
