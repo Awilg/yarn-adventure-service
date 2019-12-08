@@ -1,7 +1,7 @@
 shadowJar {
-	baseName = 'adventure-service-core'
-	classifier = null
-	version = null
+	archiveBaseName = 'adventure-service-core'
+	archiveClassifier = 'all'
+	archiveVersion = null
 }
 
 sourceSets {

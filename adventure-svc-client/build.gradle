@@ -1,7 +1,7 @@
 shadowJar {
-	baseName = 'adventure-service-client'
-	classifier = null
-	version = null
+	archiveBaseName = 'adventure-svc-client'
+	archiveClassifier = 'all'
+	archiveVersion = null
 }
 
 sourceSets {

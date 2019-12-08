@@ -3,7 +3,7 @@ services:
     adventure-service:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: adventure-svc-core.Dockerfile
         ports:
             - "5005:5005"
             - "8080:8080"
