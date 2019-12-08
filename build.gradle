@@ -34,6 +34,14 @@ subprojects {
 	apply plugin: 'org.jetbrains.dokka'
 	apply plugin: 'com.github.johnrengelman.shadow'
 	apply plugin: 'maven-publish'
+
+	dokka {
+		outputFormat = 'html'
+		outputDirectory = "$buildDir/dokka"
+
+		subProjects = [":adventure-svc-core",
+					   ":adventure-svc-client"]
+	}
 }
 
 project(':adventure-svc-core') {
