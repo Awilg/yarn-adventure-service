@@ -27,7 +27,6 @@ import org.litote.kmongo.id.jackson.IdJacksonModule
 import org.litote.kmongo.reactivestreams.KMongo
 import org.slf4j.event.Level
 
-
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused")
@@ -52,7 +51,7 @@ fun Application.module() {
 	}
 
 	// Connect to the DB
-	val client = KMongo.createClient("mongodb://localhost:27017").coroutine //use coroutine extension
+	val client = KMongo.createClient("mongodb://mongo:27017").coroutine //use coroutine extension
 	val database = client.getDatabase("Yarn-User")
 	val adventureCollection = database.getCollection<Adventure>()
 	val adventureInProgressCollection = database.getCollection<AdventureInProgress>()

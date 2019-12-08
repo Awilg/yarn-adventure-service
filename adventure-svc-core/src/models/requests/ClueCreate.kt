@@ -11,8 +11,8 @@ import com.yarn.services.models.*
 	property = "type"
 )
 @JsonSubTypes(
-	JsonSubTypes.Type(value = ClueTextCreate::class, name = "text"),
-	JsonSubTypes.Type(value = ClueLocationCreate::class, name = "location")
+	JsonSubTypes.Type(value = ClueTextCreate::class, name = "Text"),
+	JsonSubTypes.Type(value = ClueLocationCreate::class, name = "Location")
 )
 interface ClueCreate {
 	val cluePrompt: String
@@ -48,14 +48,14 @@ fun ClueCreate.toClue(): IClue {
 	}
 }
 
-@JsonTypeName("text")
+@JsonTypeName("Text")
 class ClueTextCreate(
 	override val cluePrompt: String,
 	override val hints: List<String>? = emptyList(),
 	val answer: String
 ) : ClueCreate
 
-@JsonTypeName("location")
+@JsonTypeName("Location")
 class ClueLocationCreate(
 	override val cluePrompt: String,
 	override val hints: List<String>? = emptyList(),

@@ -1,0 +1,38 @@
+ext {
+	versions = [
+		ktor                   : '1.2.4',
+		kotlin                 : '1.3.61',
+		logback                : '1.2.1',
+		shadow                 : '2.0.1'
+	]
+
+	shared = [
+		jetbrains : [
+			kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+			kotlinstdlib : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+		],
+		ktor : [
+			auth : "io.ktor:ktor-auth:${versions.ktor}",
+			authJwt : "io.ktor:ktor-auth-jwt:${versions.ktor}",
+			clientCore : "io.ktor:ktor-client-core:${versions.ktor}",
+			clientCoreJvm : "io.ktor:ktor-client-core-jvm:${versions.ktor}",
+			metrics : "io.ktor:ktor-metrics:${versions.ktor}",
+			jackson : "io.ktor:ktor-jackson:${versions.ktor}",
+			serverCore : "io.ktor:ktor-server-core:${versions.ktor}",
+			serverHostCommon : "io.ktor:ktor-server-host-common:${versions.ktor}",
+			serverNetty : "io.ktor:ktor-server-netty:${versions.ktor}",
+			serverTests : "io.ktor:ktor-server-tests:${versions.ktor}"
+		],
+		jengelman: [
+			shadow : "com.github.jengelman.gradle.plugins:shadow:${versions.shadow}"
+		],
+		logback: [
+			classic : "ch.qos.logback:logback-classic:${versions.logback}"
+		],
+		yarn: [
+			core : "com.yarn:core:0.0.1"
+		]
+	]
+}
+// mavenlocal
+//compile 'com.yarn:core:0.0.1'

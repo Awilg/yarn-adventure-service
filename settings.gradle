@@ -1,1 +1,3 @@
 rootProject.name = "adventure"
+
+include ":adventure-svc-core"

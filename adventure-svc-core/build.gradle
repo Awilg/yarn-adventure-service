@@ -1,0 +1,27 @@
+shadowJar {
+	baseName = 'adventure-service-core'
+	classifier = null
+	version = null
+}
+
+sourceSets {
+	main.kotlin.srcDirs = main.java.srcDirs = ['src']
+	test.kotlin.srcDirs = test.java.srcDirs = ['test']
+	main.resources.srcDirs = ['resources']
+	test.resources.srcDirs = ['testresources']
+}
+
+dependencies {
+	implementation shared.jetbrains.kotlin
+	implementation shared.jetbrains.kotlinstdlib
+	implementation shared.ktor.serverNetty
+	implementation shared.ktor.metrics
+	implementation shared.ktor.serverCore
+	implementation shared.ktor.auth
+	implementation shared.ktor.authJwt
+	implementation shared.ktor.jackson
+	implementation shared.logback.classic
+	implementation shared.yarn.core
+
+	testImplementation shared.ktor.serverTests
+}
