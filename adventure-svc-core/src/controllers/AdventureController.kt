@@ -17,7 +17,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
 class AdventureController(kodein: Kodein) : KodeinController(kodein) {
-	private val adventureDao: AdventureRepository by instance()
+	private val adventureDao: AdventureRepository by instance<AdventureRepository>()
 
 	override fun Routing.registerRoutes() {
 		get("/adventure/{id}") {

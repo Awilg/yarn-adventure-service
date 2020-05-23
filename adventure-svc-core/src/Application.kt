@@ -20,6 +20,7 @@ import io.ktor.request.path
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import kotlinx.coroutines.launch
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
 import org.litote.kmongo.coroutine.coroutine
@@ -51,9 +52,13 @@ fun Application.module() {
 	}
 
 	// Connect to the DB
-	val client = KMongo.createClient("mongodb://mongo:27017").coroutine //use coroutine extension
+	// think this uses "mongo" for the docker container
+	val client = KMongo.createClient("mongodb://127.0.0.1:27017").coroutine //use coroutine extension
 	val database = client.getDatabase("Yarn-User")
 	val adventureCollection = database.getCollection<Adventure>()
+	launch {
+		adventureCollection.createIndex("{\"location\" : \"2dsphere\" }" )
+	}
 	val adventureInProgressCollection = database.getCollection<AdventureInProgress>()
 
 
