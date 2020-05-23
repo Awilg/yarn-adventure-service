@@ -44,7 +44,7 @@ class AdventureController(kodein: Kodein) : KodeinController(kodein) {
 				request.longitude,
 				request.minDistance,
 				request.maxDistance
-			)
+			).map { adv -> adv.toInfo() }
 			call.respond(results)
 		}
 	}
