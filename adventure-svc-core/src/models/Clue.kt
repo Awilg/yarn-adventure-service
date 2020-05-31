@@ -5,13 +5,14 @@ import org.litote.kmongo.Id
 import org.litote.kmongo.newId
 
 interface IClue {
+	val id: Id<BaseClue>
 	val cluePrompt: String
 	val type: String
 	val hints: List<String>?
 }
 
 abstract class BaseClue(
-	@BsonId val id: Id<BaseClue> = newId(),
+	@BsonId override val id: Id<BaseClue> = newId(),
 	override val cluePrompt: String,
 	override val type: String = ClueType.Text.name,
 	override val hints: List<String>?

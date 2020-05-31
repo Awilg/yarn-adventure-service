@@ -19,7 +19,7 @@ interface ClueCreate {
 	val hints: List<String>?
 }
 
-fun ClueCreate.toClue(): IClue {
+fun ClueCreate.toClue(): BaseClue {
 	when (this) {
 		is ClueTextCreate -> {
 			return ClueText(

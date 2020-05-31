@@ -2,6 +2,7 @@ package com.yarn.services
 
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.yarn.services.controllers.AdventureController
+import com.yarn.services.controllers.ClueSolveController
 import com.yarn.services.core.kodein.bindSingleton
 import com.yarn.services.core.kodein.kodeinApplication
 import com.yarn.services.data.AdventureInProgress
@@ -27,6 +28,7 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.id.jackson.IdJacksonModule
 import org.litote.kmongo.reactivestreams.KMongo
 import org.slf4j.event.Level
+import com.yarn.services.managers.ClueManager as ClueManager
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -65,6 +67,9 @@ fun Application.module() {
 	kodeinApplication {
 		bind<AdventureRepository>() with singleton { AdventureRepository(adventureCollection) }
 		bindSingleton { AdventureController(it) }
+		bindSingleton { ClueSolveController(it) }
+		bindSingleton { ClueManager(it) }
+
 	}
 
 	routing {

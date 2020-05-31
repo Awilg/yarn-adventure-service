@@ -15,7 +15,7 @@ class Adventure private constructor(
 	val creatorId: String?,
 	val createdAt: String = Instant.now().toEpochMilli().toString(),
 	val expiresAt: String? = null,
-	var clues: List<IClue>?
+	var clues: List<BaseClue>?
 ) {
 	override fun equals(other: Any?) = other is Adventure &&
 		id == other.id &&
@@ -49,7 +49,7 @@ class Adventure private constructor(
 		@set:JvmSynthetic // Hide 'void' setter from Java.
 		var expiresAt: String? = null
 		@set:JvmSynthetic // Hide 'void' setter from Java.
-		var clues: List<IClue>? = null
+		var clues: List<BaseClue>? = null
 
 		fun setLocation(location: Location?) = apply { this.location = location }
 		fun setName(name: String?) = apply { this.name = name }
@@ -57,7 +57,7 @@ class Adventure private constructor(
 		fun setDescription(description: String?) = apply { this.description = description }
 		fun setCreatorId(creatorId: String?) = apply { this.creatorId = creatorId }
 		fun setExpiresAt(expiresAt: String?) = apply { this.expiresAt = expiresAt }
-		fun setClues(clues: List<IClue>?) = apply { this.clues = clues }
+		fun setClues(clues: List<BaseClue>?) = apply { this.clues = clues }
 
 		fun build() = Adventure(
 			location = this.location,
