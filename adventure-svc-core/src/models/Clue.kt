@@ -1,9 +1,23 @@
 package com.yarn.services.models
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
+import com.yarn.services.models.requests.ClueLocationCreate
+import com.yarn.services.models.requests.ClueTextCreate
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 import org.litote.kmongo.newId
 
+
+@JsonTypeInfo(
+		use = JsonTypeInfo.Id.NAME,
+		include = JsonTypeInfo.As.PROPERTY,
+		property = "type"
+)
+@JsonSubTypes(
+		JsonSubTypes.Type(value = ClueText::class, name = "Text"),
+		JsonSubTypes.Type(value = ClueLocation::class, name = "Location")
+)
 interface IClue {
 	val id: Id<BaseClue>
 	val cluePrompt: String
