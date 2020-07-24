@@ -1,5 +1,6 @@
 package com.yarn.services.models.requests
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonTypeName
@@ -49,6 +50,7 @@ fun ClueCreate.toClue(): BaseClue {
 }
 
 @JsonTypeName("Text")
+@JsonIgnoreProperties(ignoreUnknown = true)
 class ClueTextCreate(
 	override val cluePrompt: String,
 	override val hints: List<String>? = emptyList(),
@@ -56,6 +58,7 @@ class ClueTextCreate(
 ) : ClueCreate
 
 @JsonTypeName("Location")
+@JsonIgnoreProperties(ignoreUnknown = true)
 class ClueLocationCreate(
 	override val cluePrompt: String,
 	override val hints: List<String>? = emptyList(),
