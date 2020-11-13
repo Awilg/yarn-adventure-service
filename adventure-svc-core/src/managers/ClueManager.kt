@@ -12,15 +12,6 @@ import org.kodein.di.generic.instance
 class ClueManager(override val kodein: Kodein) : KodeinAware {
     private val adventureDao: AdventureRepository by instance<AdventureRepository>()
 
-
-    fun createClue() {
-
-    }
-
-    fun updateClue() {
-
-    }
-
     suspend fun attemptClueSolveText(adventureId: String, clueId:String, answer:String): Boolean {
         val adventure = adventureId.let { id -> adventureDao.get(id) }
 

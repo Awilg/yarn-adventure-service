@@ -27,7 +27,7 @@ class ClueSolveController(kodein: Kodein) : KodeinController(kodein) {
                     call.respond(clueManager.attemptClueSolveText(adventureId, clueId, answer))
                 }
             }
-        }
+        }  
 
         post("/adventure/{id}/solve/{clueId}/location") {
             logger.info("Trying to solve a location clue!")

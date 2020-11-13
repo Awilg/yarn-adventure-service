@@ -28,6 +28,26 @@ class AdventureController(kodein: Kodein) : KodeinController(kodein) {
 			adventure?.let { a -> call.respond(a.toInfo()) }
 		}
 
+		get("/adventure/featured") {
+			logger.info("Fetching the featured adventure!")
+
+			val lat = call.parameters["latitude"]
+			val lon = call.parameters["longitude"]
+
+			if (lat != null && lon != null) {
+				val result = adventureDao.findByLocation(
+						lat.toDouble(),
+						lon.toDouble(),
+						0.0,
+						100000.0
+				).map { adv -> adv.toInfo() }[0]
+				call.respond(result)
+			} else {
+				//return default
+				call.respond("TODO: default")
+			}
+		}
+
 		post("/adventure") {
 			val toCreate = call.receive<AdventureCreate>()
 			val newAdventure = toCreate.toAdventure()
